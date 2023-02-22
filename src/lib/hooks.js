@@ -7,7 +7,7 @@ import { dev } from '$app/environment'
 import { config } from './config.js'
 
 /**
- * This hook creates the postify API.
+ * This hook creates the leblog API.
  *
  * @type {import('@sveltejs/kit').Handle}
  */

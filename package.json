@@ -1,6 +1,8 @@
 {
 	"name": "leblog",
+	"license": "MIT",
 	"version": "0.1.0",
+	"author": "Nick Goodall",
 	"scripts": {
 		"dev": "svelte-package --watch",
 		"build": "vite build && npm run package",
@@ -27,6 +29,11 @@
 			]
 		}
 	},
+	"dependencies": {
+		"changelog-parser": "^3.0.1",
+		"gray-matter": "^4.0.3",
+		"svelte-markdown": "^0.2.3"
+	},
 	"peerDependencies": {
 		"@sveltejs/kit": "^1.5.0",
 		"svelte": "^3.55.1"
@@ -48,9 +55,8 @@
 	"svelte": "./dist/index.js",
 	"types": "./dist/index.d.ts",
 	"type": "module",
-	"dependencies": {
-		"changelog-parser": "^3.0.1",
-		"gray-matter": "^4.0.3",
-		"svelte-markdown": "^0.2.3"
+	"packageManager": "pnpm@7.27.1",
+	"engines": {
+		"pnpm": "^7.0.0"
 	}
 }
