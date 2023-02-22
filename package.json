@@ -1,6 +1,6 @@
 {
-	"name": "postifier",
-	"version": "0.0.1",
+	"name": "leblog",
+	"version": "0.1.0",
 	"scripts": {
 		"dev": "svelte-package --watch",
 		"build": "vite build && npm run package",
@@ -15,9 +15,9 @@
 			"types": "./dist/index.d.ts",
 			"svelte": "./dist/index.js"
 		},
-		"./api": {
-			"types": "./dist/api/index.d.ts",
-			"svelte": "./dist/api/index.js"
+		"./hooks": {
+			"types": "./dist/hooks.d.ts",
+			"svelte": "./dist/hooks.js"
 		}
 	},
 	"peerDependencies": {
@@ -28,6 +28,9 @@
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.5.0",
 		"@sveltejs/package": "^2.0.1",
+		"prettier": "^2.8.4",
+		"prettier-plugin-jsdoc": "^0.4.2",
+		"prettier-plugin-svelte": "^2.9.0",
 		"publint": "^0.1.9",
 		"svelte": "^3.55.1",
 		"svelte-check": "^3.0.1",

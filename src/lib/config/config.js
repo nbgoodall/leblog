@@ -8,10 +8,10 @@ import default_config from './default_config.json'
 
 let user_config = {}
 
-const user_config_exists = fs.existsSync('postifier.config.js')
+const user_config_exists = fs.existsSync('leblog.config.js')
 
 if (user_config_exists) {
-  const [file_import] = Object.values(import.meta.glob('/postifier.config.js', { eager: true }))
+  const [file_import] = Object.values(import.meta.glob('/leblog.config.js', { eager: true }))
 
   user_config = file_import.default
 }

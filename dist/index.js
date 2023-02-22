@@ -10,7 +10,7 @@ export const loadCollection =
     fetch_and_insert_parent({
       fetch,
       parent,
-      path: `/postifier/collections/${collection}.json`
+      path: `/leblog/collections/${collection}.json`
     })
 
 /**
@@ -23,7 +23,7 @@ export const loadEntry =
     fetch_and_insert_parent({
       fetch,
       parent,
-      path: `/postifier/collections/${collection}/${params.slug}.json`
+      path: `/leblog/collections/${collection}/${params.slug}.json`
     })
 
 /**

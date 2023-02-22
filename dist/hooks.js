@@ -4,17 +4,17 @@ import changelog from 'changelog-parser'
 
 import { dev } from '$app/environment'
 
-import { config } from '../config'
+import { config } from './config'
 
 /**
  * This hook creates the postify API.
  *
  * @type {import('@sveltejs/kit').Handle}
  */
-export const postify = async ({ event, resolve }) => {
-  if (event.url.pathname.match(/^\/postifier\/collections/)) {
+export const leblog = async ({ event, resolve }) => {
+  if (event.url.pathname.match(/^\/leblog\/collections/)) {
     const [collection, slug] = event.url.pathname
-      .replace('/postifier/collections/', '')
+      .replace('/leblog/collections/', '')
       .replace('.json', '')
       .toLowerCase()
       .split('/')
@@ -152,3 +152,5 @@ const parse_changelog = async (filePath) => {
 
   return await Promise.all(changelogPromise)
 }
+
+export default leblog

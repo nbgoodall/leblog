@@ -3,4 +3,5 @@
  *
  * @type {import('@sveltejs/kit').Handle}
  */
-export const postify: import('@sveltejs/kit').Handle;
+export const leblog: import('@sveltejs/kit').Handle;
+export default leblog;
