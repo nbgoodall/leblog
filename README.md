@@ -19,11 +19,13 @@ npm install leblog
 
 ## Usage
 
-leblog works by mounting an API with a single endpoint, `/api/blog`, which returns a list of blog posts. You can then use this API to fetch blog posts and display them however you like.
+leblog works by creating an API at `/leblog` to respond with posts, which you can then load and render with the included helpers.
 
 ### 1. Write your posts
 
 By default leblog looks in `src/posts` for markdown files ([configurable](#configuration-optional)), formatted as `yyyy-mm-dd-{ slug }.md`.
+
+Entries beginning with an underscore (`_`) are drafts and will only be included in development.
 
 ### 2. Mount the API
 
@@ -68,7 +70,7 @@ import { loadEntry } from 'leblog'
 export const load = loadEntry('posts')
 ```
 
-In this case leblog will use the `slug` param to find the specific entry in the `posts` collection.
+leblog will use the `slug` param to find the specific entry in the `posts` collection.
 
 ### 3. Render your posts
 
