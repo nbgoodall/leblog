@@ -4,7 +4,7 @@ import changelog from 'changelog-parser'
 
 import { dev } from '$app/environment'
 
-import { config } from './config'
+import { config } from './config.js'
 
 /**
  * This hook creates the postify API.

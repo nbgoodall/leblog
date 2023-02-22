@@ -20,6 +20,13 @@
 			"svelte": "./dist/hooks.js"
 		}
 	},
+	"typesVersions": {
+		">4.0": {
+			"hooks": [
+				"./dist/hooks.d.ts"
+			]
+		}
+	},
 	"peerDependencies": {
 		"@sveltejs/kit": "^1.5.0",
 		"svelte": "^3.55.1"
