@@ -2,4 +2,4 @@
 title: Another post
 ---
 
-This is another post!
+Writing filler text is surprisingly hard without resorting to lorem.

@@ -94,11 +94,14 @@ const render_entry = ({ collection, slug }) => {
 const collection_filenames = (collection) => {
   const collection_path = config.collections[collection]
 
-  return fs.readdirSync(collection_path).filter((filename) => {
-    const is_draft = filename.match(/^_/)
+  return fs
+    .readdirSync(collection_path)
+    .filter((filename) => filename.endsWith('.md'))
+    .filter((filename) => {
+      const is_draft = filename.match(/^_/)
 
-    return dev ? true : !is_draft
-  })
+      return dev ? true : !is_draft
+    })
 }
 
 /**

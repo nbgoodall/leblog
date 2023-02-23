@@ -25,7 +25,7 @@
 
   <ul class="flex !list-none !pl-0 font-header text-2xl !mt-0 space-x-6">
     {#each links as link}
-      {@const is_active = link.url === $page.url.pathname }
+      {@const is_active = link.url === $page.url.pathname || ($page.url.pathname.startsWith(link.url) && link.url !== '/') }
 
       <li class="flex items-center space-x-1">
         <a
