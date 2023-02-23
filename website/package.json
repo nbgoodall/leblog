@@ -12,7 +12,7 @@
 		"format": "prettier --plugin-search-dir . --write ."
 	},
 	"dependencies": {
-		"leblog": "*",
+		"leblog": "workspace:../package",
 		"slender-ui": "0.0.1-beta.126"
 	},
 	"devDependencies": {
