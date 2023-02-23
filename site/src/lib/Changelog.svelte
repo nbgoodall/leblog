@@ -1,7 +1,7 @@
 <script>
   import { Entry } from 'leblog/entry'
 
-  /** @type {import('leblog').Entry[]} */
+  /** @type {Entry[]} */
   export let entries = []
 </script>
 

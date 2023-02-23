@@ -1,5 +1,20 @@
 # Changelog
 
+## 0.3.0 - 2023-02-23
+
+### Changed
+
+- `loadCollection`, `loadEntry` and `load` now run on the server in `+page.server.js` endpoints, removing the need for a handle hook.
+- The `Entry` component is now exported from `leblog/entry`.
+
+### Fixed
+
+- Only markdown files (`.md`) are now considered entries.
+
+### Removed
+
+- The `leblog` hook, which is replaced by the aforementioned load functions.
+
 ## 0.2.0 - 2023-02-23
 
 ### Added
