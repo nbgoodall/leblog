@@ -40,7 +40,8 @@
 	"peerDependencies": {
 		"@sveltejs/kit": "*",
 		"svelte": "*",
-		"vite": "*"
+		"vite": "*",
+		"typescript": "*"
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",
