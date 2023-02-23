@@ -13,13 +13,11 @@
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-static": "^2.0.1",
-		"svelte-check": "^3.0.1"
-	},
-	"peerDependencies": {
-		"@sveltejs/kit": "*",
-		"svelte": "*",
-		"vite": "*",
-		"typescript": "*"
+		"svelte-check": "^3.0.1",
+		"@sveltejs/kit": "^1.5.0",
+		"svelte": "^3.55.1",
+		"typescript": "^4.9.3",
+		"vite": "^4.0.0"
 	},
 	"type": "module"
 }
