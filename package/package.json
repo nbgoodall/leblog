@@ -1,7 +1,8 @@
 {
 	"name": "leblog",
 	"license": "MIT",
-	"version": "0.3.0",
+	"version": "0.3.1",
+	"description": "Add a blog (or changelog) to any SvelteKit site.",
 	"author": "Nick Goodall",
 	"scripts": {
 		"dev": "svelte-package --watch",
