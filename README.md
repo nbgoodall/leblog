@@ -46,10 +46,10 @@ import { sequence } from '@sveltejs/kit/hooks'
 export const handle = sequence(some_other_hook, leblog)
 ```
 
-Or simply:
+`leblog` is also exported as `handle` so you can simply:
 
 ```js
-export { leblog as handle } from 'leblog/hooks'
+export { handle } from 'leblog/hooks'
 ```
 
 ### 2. Load your posts
@@ -71,6 +71,14 @@ export const load = loadEntry('posts')
 ```
 
 leblog will use the `slug` param to find the specific entry in the `posts` collection.
+
+If you only have 1 collection, you can use the exported `load` function to infer which one.
+
+In `+page.js` or `[slug]/+page.js`:
+
+```js
+export { load } from 'leblog'
+```
 
 ### 3. Render your posts
 
