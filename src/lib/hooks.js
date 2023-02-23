@@ -14,7 +14,7 @@ const COLLECTION_KEYS = Object.keys(config.collections)
  * @type {import('@sveltejs/kit').Handle}
  */
 export const leblog = async ({ event, resolve }) => {
-  console.log('leblog', event.url.pathname)
+  // Specific entries/entry
   if (event.url.pathname.match(/^\/leblog\/collections/)) {
     const [collection, slug] = event.url.pathname
       .replace('/leblog/collections/', '')
@@ -22,21 +22,19 @@ export const leblog = async ({ event, resolve }) => {
       .toLowerCase()
       .split('/')
 
-    if (collection === 'changelog') {
-      return render_changelog()
-    } else if (slug) {
-      return render_entry({ collection, slug })
-    } else {
-      return render_collection({ collection })
-    }
-  } else if (event.url.pathname.match(/^\/leblog\/entries/)) {
+    return slug ? render_entry({ collection, slug }) : render_collection({ collection })
+  }
+  // Single collection, if there's only 1
+  else if (event.url.pathname.match(/^\/leblog\/entries/)) {
     if (COLLECTION_KEYS.length > 1)
       throw new Error(
         "Can't use `load` with multiple collections, please specify one using `loadCollection`."
       )
 
     return render_collection({ collection: COLLECTION_KEYS[0] })
-  } else if (event.url.pathname.match(/^\/leblog\/entry\/\w+/)) {
+  }
+  // Single entry, if there's only 1 collection
+  else if (event.url.pathname.match(/^\/leblog\/entry\/\w+/)) {
     if (COLLECTION_KEYS.length > 1)
       throw new Error(
         "Can't use `load` with multiple collections, please specify one using `loadEntry`."
@@ -57,6 +55,9 @@ export const handle = leblog
  * @param {string} params.collection
  */
 const render_collection = ({ collection }) => {
+  if (collection === 'changelog' && fs.lstatSync(config.collections.changelog).isFile())
+    return render_changelog()
+
   const entries = collection_filenames(collection).map((filename) =>
     create_entry({ collection, filename })
   )
@@ -140,9 +141,6 @@ const create_entry = ({ collection, filename }) => {
  */
 
 const render_changelog = async () => {
-  if (fs.lstatSync(config.collections.changelog).isDirectory())
-    return render_collection({ collection: 'changelog' })
-
   const data = JSON.stringify({
     changelog: await parse_changelog(config.collections.changelog)
   })
