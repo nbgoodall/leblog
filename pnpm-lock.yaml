@@ -49,6 +49,7 @@ importers:
       autoprefixer: ^10.4.7
       leblog: workspace:^
       postcss: ^8.4.14
+      slender-ui: 0.0.1-beta.126
       svelte: ^3.55.1
       svelte-check: ^3.0.1
       tailwindcss: ^3.1.5
@@ -56,6 +57,7 @@ importers:
       vite: ^4.0.0
     dependencies:
       leblog: link:../package
+      slender-ui: 0.0.1-beta.126
     devDependencies:
       '@sveltejs/adapter-static': 2.0.1_@sveltejs+kit@1.8.3
       '@sveltejs/kit': 1.8.3_svelte@3.55.1+vite@4.1.4
@@ -1564,6 +1566,10 @@ packages:
       mrmime: 1.0.1
       totalist: 3.0.0
     dev: true
+
+  /slender-ui/0.0.1-beta.126:
+    resolution: {integrity: sha512-z0Y90laRnWKj38OBRzZ3+ZWO/ZDRXm/yq6Oo22KFHArD/RanbLmFOX2n4CpathE2zt27cQvllvdSJeNFEb0XDg==}
+    dev: false
 
   /sorcery/0.11.0:
     resolution: {integrity: sha512-J69LQ22xrQB1cIFJhPfgtLuI6BpWRiWu1Y3vSsIwK/eAScqJxd/+CJlUuHQRdX2C9NGFamq+KqNywGgaThwfHw==}

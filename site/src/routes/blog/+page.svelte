@@ -9,7 +9,7 @@
   {#each data.posts as entry}
     <li class="!pl-0">
       <h2 class="text-4xl flex justify-between items-center">
-        <a href="/blog/{ entry.slug }" class="no-underline font-bold border-b border-transparent hover:border-black transition-colors">{ entry.title }</a>
+        <a href="/blog/{ entry.slug }" class="no-underline font-bold border-b border-transparent hover:border-black transition-colors" data-sveltekit-noscroll>{ entry.title }</a>
 
         <span class="text-gray-400 text-2xl font-light">{ new Date(entry.date).toDateString() }</span>
       </h2>
