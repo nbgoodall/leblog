@@ -6,16 +6,19 @@ import { dev } from '$app/environment'
 
 import { config } from './config.js'
 
+const COLLECTION_KEYS = Object.keys(config.collections)
+
 /**
  * This hook creates the leblog API.
  *
  * @type {import('@sveltejs/kit').Handle}
  */
 export const leblog = async ({ event, resolve }) => {
+  console.log('leblog', event.url.pathname)
   if (event.url.pathname.match(/^\/leblog\/collections/)) {
     const [collection, slug] = event.url.pathname
       .replace('/leblog/collections/', '')
-      .replace('.json', '')
+      .replace(/\.\w+/, '')
       .toLowerCase()
       .split('/')
 
@@ -26,10 +29,28 @@ export const leblog = async ({ event, resolve }) => {
     } else {
       return render_collection({ collection })
     }
+  } else if (event.url.pathname.match(/^\/leblog\/entries/)) {
+    if (COLLECTION_KEYS.length > 1)
+      throw new Error(
+        "Can't use `load` with multiple collections, please specify one using `loadCollection`."
+      )
+
+    return render_collection({ collection: COLLECTION_KEYS[0] })
+  } else if (event.url.pathname.match(/^\/leblog\/entry\/\w+/)) {
+    if (COLLECTION_KEYS.length > 1)
+      throw new Error(
+        "Can't use `load` with multiple collections, please specify one using `loadEntry`."
+      )
+
+    const slug = event.url.pathname.replace('/leblog/entry/', '').replace(/\.\w+/, '').toLowerCase()
+
+    return render_entry({ collection: COLLECTION_KEYS[0], slug })
   }
 
   return await resolve(event)
 }
+
+export const handle = leblog
 
 /**
  * @param {object} params
