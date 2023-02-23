@@ -47,7 +47,7 @@ importers:
       '@sveltejs/kit': ^1.5.0
       '@tailwindcss/typography': ^0.5.9
       autoprefixer: ^10.4.7
-      leblog: workspace:^
+      leblog: workspace:package
       postcss: ^8.4.14
       slender-ui: 0.0.1-beta.126
       svelte: ^3.55.1
