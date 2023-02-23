@@ -150,6 +150,14 @@ leblog looks for a `leblog.config.js` file in the root of directory of your proj
 
 `changelog` is a special key, whose value can either be a path to a directory containing markdown files, or a single markdown file adhering to the [keepachangelog.com](http://keepachangelog.com) standards.
 
+## Todo
+
+- [x] Draft posts
+- [ ] RSS feeds
+- [ ] Pagination
+- [ ] Code syntax highlighting
+- [ ] Authors
+
 ## Thanks
 
 - [svelte-markdown](https://github.com/pablo-abc/svelte-markdown) for the markdown rendering.

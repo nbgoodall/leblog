@@ -150,6 +150,7 @@ const render_changelog = async () => {
 
   return new Response(data)
 }
+
 /**
  * @param {string} filePath
  * @returns {Promise<ChangelogEntry[]>}
