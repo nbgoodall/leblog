@@ -19,42 +19,17 @@ npm install leblog
 
 ## Usage
 
-leblog works by creating an API at `/leblog` to respond with posts, which you can then load and render with the included helpers.
+leblog works by loading your posts through `+page.server.js` files, which you can then render with the included `Entry` component.
 
 ### 1. Write your posts
 
-By default leblog looks in `src/posts` for markdown files ([configurable](#configuration-optional)), formatted as `yyyy-mm-dd-{ slug }.md`.
+By default it looks in `src/posts` for markdown files ([configurable](#configuration-optional)), formatted as `yyyy-mm-dd-{ slug }.md`.
 
 Entries beginning with an underscore (`_`) are drafts and will only be included in development.
 
-### 2. Mount the API
-
-In `src/hooks.server.js`:
-
-```js
-import { leblog } from 'leblog/hooks'
-
-export const handle = leblog
-```
-
-Or by sequencing it with other hooks:
-
-```js
-import { leblog } from 'leblog/hooks'
-import { sequence } from '@sveltejs/kit/hooks'
-
-export const handle = sequence(some_other_hook, leblog)
-```
-
-`leblog` is also exported as `handle` so you can simply:
-
-```js
-export { handle } from 'leblog/hooks'
-```
-
 ### 2. Load your posts
 
-In any load function, e.g. `+page.js`:
+In any server load function `+page.server.js`:
 
 ```js
 import { loadCollection } from 'leblog'
@@ -62,7 +37,7 @@ import { loadCollection } from 'leblog'
 export const load = loadCollection('posts') // or whatever you've named it
 ```
 
-And to load a single post in a sub-route (e.g. `[slug]/+page.js`):
+And to load a single post in a sub-route `[slug]/+page.server.js`:
 
 ```js
 import { loadEntry } from 'leblog'
@@ -74,7 +49,7 @@ leblog will use the `slug` param to find the specific entry in the `posts` colle
 
 If you only have 1 collection, you can use the exported `load` function to infer which one.
 
-In `+page.js` or `[slug]/+page.js`:
+In `+page.server.js` or `[slug]/+page.server.js`:
 
 ```js
 export { load } from 'leblog'
@@ -86,7 +61,7 @@ In the neighboring `+page.svelte`, `data` will be populated with the name of the
 
 ```svelte
 <script>
-  import { Entry } from 'leblog'
+  import { Entry } from 'leblog/entry'
 
   /** @type {import('./$types').PageData} */
   export let data
@@ -107,7 +82,7 @@ Or for a single entry:
 
 ```svelte
 <script>
-  import { Entry } from 'leblog'
+  import { Entry } from 'leblog/entry'
 
   /** @type {import('./$types').PageData} */
   export let data
