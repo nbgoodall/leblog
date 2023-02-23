@@ -1,5 +1,5 @@
 ---
-title: Introduction to leblog
+title: introduction to leblog
 ---
 
 An introduction, an example, a **kitchen** _sink_.

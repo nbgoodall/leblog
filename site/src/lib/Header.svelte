@@ -4,15 +4,15 @@
   const links = [
     {
       url: '/',
-      title: 'Home'
+      title: 'home'
     },
     {
       url: '/blog',
-      title: 'Demo'
+      title: 'demo'
     },
     {
       url: 'https://github.com/nbgoodall/leblog',
-      title: 'Docs',
+      title: 'docs',
       target: "_blank"
     }
   ]
@@ -21,7 +21,7 @@
 <div class="flex items-center flex-col">
   <h1 class="text-5xl"><em>leblog</em></h1>
 
-  <p class="mt-0 text-lg">Add a blog (or changelog) to any SvelteKit site.</p>
+  <p class="mt-0 text-lg">add a blog (or changelog) to any SvelteKit site</p>
 
   <ul class="flex !list-none !pl-0 font-header text-2xl !mt-0 space-x-6">
     {#each links as link}

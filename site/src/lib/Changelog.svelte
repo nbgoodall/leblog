@@ -11,7 +11,7 @@
       <h2 class="text-4xl flex justify-between items-center">
         <span>{ entry.version }</span>
 
-        <span class="text-gray-400 text-2xl font-light">{ new Date(entry.date).toDateString() }</span>
+        <span class="text-gray-400 text-2xl font-light">{ new Date(entry.date).toDateString().toLowerCase() }</span>
       </h2>
 
       <Entry {entry} />
