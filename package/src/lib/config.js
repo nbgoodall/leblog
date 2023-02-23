@@ -10,6 +10,8 @@ let user_config = {}
 
 const user_config_exists = fs.existsSync('leblog.config.js')
 
+console.log({ user_config_exists })
+
 if (user_config_exists) {
   const [file_import] = Object.values(import.meta.glob('/leblog.config.js', { eager: true }))
 

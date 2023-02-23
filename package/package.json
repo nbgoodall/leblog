@@ -17,15 +17,15 @@
 			"types": "./dist/index.d.ts",
 			"svelte": "./dist/index.js"
 		},
-		"./hooks": {
-			"types": "./dist/hooks.d.ts",
-			"svelte": "./dist/hooks.js"
+		"./entry": {
+			"types": "./dist/entry.d.ts",
+			"svelte": "./dist/entry.js"
 		}
 	},
 	"typesVersions": {
 		">4.0": {
-			"hooks": [
-				"./dist/hooks.d.ts"
+			"entry": [
+				"./dist/entry.d.ts"
 			]
 		}
 	},
