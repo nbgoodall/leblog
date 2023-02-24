@@ -6,10 +6,10 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Open Sans'],
+        sans: ['Raleway'],
         header: ['Cormorant']
       },
-      typography: {
+      typography: ({ theme }) => ({
         DEFAULT: {
           css: {
             h1: { fontFamily },
@@ -17,10 +17,12 @@ module.exports = {
             h3: { fontFamily },
             h4: { fontFamily },
             h5: { fontFamily },
-            h6: { fontFamily }
+            h6: { fontFamily },
+            '--tw-prose-pre-code': theme('colors.gray[800]'),
+            '--tw-prose-pre-bg': theme('colors.gray[100]')
           }
         }
-      }
+      })
     }
   },
   plugins: [require('@tailwindcss/typography')]
