@@ -18,7 +18,8 @@
 			"types": "./dist/index.d.ts",
 			"node": "./dist/index.js",
 			"browser": "./dist/index.browser.js",
-			"svelte": "./dist/index.js"
+			"svelte": "./dist/index.browser.js",
+			"default": "./dist/index.browser.js"
 		}
 	},
 	"files": [
@@ -44,7 +45,7 @@
 		"@sveltejs/kit": "^1.5.0",
 		"svelte": "^3.55.1"
 	},
-	"svelte": "./dist/index.js",
+	"svelte": "./dist/index.browser.js",
 	"types": "./dist/index.d.ts",
 	"type": "module"
 }
