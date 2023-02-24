@@ -61,7 +61,7 @@ In the neighboring `+page.svelte`, `data` will be populated with the name of the
 
 ```svelte
 <script>
-  import { Entry } from 'leblog/entry'
+  import { Entry } from 'leblog'
 
   /** @type {import('./$types').PageData} */
   export let data
@@ -82,7 +82,7 @@ Or for a single entry:
 
 ```svelte
 <script>
-  import { Entry } from 'leblog/entry'
+  import { Entry } from 'leblog'
 
   /** @type {import('./$types').PageData} */
   export let data

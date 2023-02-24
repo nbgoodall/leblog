@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.0 - 2023-02-24
+
+### Changed
+
+- `Entry` is now exported from `leblog` instead of `leblog/entry` (conditional exports ftw).
+
 ## 0.3.1 - 2023-02-23
 
 ### Changed
