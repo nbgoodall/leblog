@@ -67,7 +67,7 @@ the title says it all`
 
 <pre>{ render_text }</pre>
 
-<p>Et voila! full documentation is on <a href="https://github.com/nbgoodall/leblog" target="_blank" rel="noreferrer">github</a>, and you can see it in action on the <a href="/blog">demo page</a>. Single-file changelogs also work, like this one (<a href="https://github.com/nbgoodall/leblog/blob/main/package/CHANGELOG.md" target="_blank" rel="noreferrer">source</a>):</p>
+<p>Et voila! Full documentation is on <a href="https://github.com/nbgoodall/leblog" target="_blank" rel="noreferrer">github</a>, and you can see it in action on the <a href="/blog">demo page</a>. Single-file changelogs also work, like this one (<a href="https://github.com/nbgoodall/leblog/blob/main/package/CHANGELOG.md" target="_blank" rel="noreferrer">source</a>):</p>
 
 
 <h2 class="relative flex items-center justify-center -mb-12">
