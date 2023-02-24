@@ -1,3 +1,2 @@
 export { load, loadCollection, loadEntry } from './helpers.js'
-
-/** @type Entry */
+export { default as Entry } from './Entry.svelte'

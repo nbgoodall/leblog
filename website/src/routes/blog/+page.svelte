@@ -1,5 +1,5 @@
 <script>
-  import { Entry } from 'leblog/entry'
+  import { Entry } from 'leblog'
 
   /** @type {import('./$types').PageData} */
   export let data
