@@ -1,7 +1,7 @@
 {
 	"name": "leblog",
 	"license": "MIT",
-	"version": "0.4.2",
+	"version": "0.4.3",
 	"description": "Add a blog (or changelog) to any SvelteKit site.",
 	"author": "Nick Goodall",
 	"scripts": {
@@ -41,8 +41,8 @@
 		"vite": "^4.0.0"
 	},
 	"peerDependencies": {
-		"@sveltejs/kit": "^1.5.0",
-		"svelte": "^3.55.1"
+		"@sveltejs/kit": "^1.0.0",
+		"svelte": "^3.54.0"
 	},
 	"types": "./dist/index.d.ts",
 	"type": "module"

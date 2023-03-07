@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.4.3 - 2023-03-07
+
+### Fixed
+
+- `@sveltejs/kit` and `svelte` dependencies are now set correctly.
+
 ## 0.4.2 - 2023-02-24
 
 ### Changed
