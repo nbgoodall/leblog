@@ -9,6 +9,20 @@
   <title>demo blog • leblog</title>
 </svelte:head>
 
+<p>
+  Welcome to le demo. This is a collection of posts in the
+  <code
+    ><a
+      href="https://github.com/nbgoodall/leblog/blob/main/website/src/posts"
+      target="_blank"
+      rel="noreferrer"
+      >src/posts</a
+    ></code
+  >
+  folder, and it comes with its very own <a href="/blog.atom" target="_blank">Atom feed</a> (RSS and
+  JSON also work).
+</p>
+
 <ul class="!list-none !pl-0">
   {#each data.posts as entry}
   <li class="!pl-0">

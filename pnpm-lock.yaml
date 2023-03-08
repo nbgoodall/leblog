@@ -25,7 +25,6 @@ importers:
       publint: ^0.1.9
       svelte: ^3.55.1
       svelte-check: ^3.0.1
-      svelte-markdown: ^0.2.3
       tslib: ^2.4.1
       typescript: ^4.9.3
       vite: ^4.0.0
@@ -35,7 +34,6 @@ importers:
       gray-matter: 4.0.3
       micromark: 3.1.0
       micromark-extension-gfm: 2.0.1
-      svelte-markdown: 0.2.3_svelte@3.55.1
     devDependencies:
       '@sveltejs/adapter-auto': 2.0.0_@sveltejs+kit@1.8.3
       '@sveltejs/kit': 1.8.3_svelte@3.55.1+vite@4.1.4
@@ -417,10 +415,6 @@ packages:
     resolution: {integrity: sha512-9AonUzyTjXXhEOa0DnqpzZi6VHlqKMswga9EXjpXnnqxwLtdvPPtlO8evrI5D9S6asFRCQ6v+wpiUKbw+vKqyg==}
     dependencies:
       '@types/ms': 0.7.31
-
-  /@types/marked/4.0.8:
-    resolution: {integrity: sha512-HVNzMT5QlWCOdeuBsgXP8EZzKUf0+AXzN+sLmjvaB3ZlLqO+e4u0uXrdw9ub69wBKFs+c6/pA4r9sy6cCDvImw==}
-    dev: false
 
   /@types/mdast/3.0.10:
     resolution: {integrity: sha512-W864tg/Osz1+9f4lrGTZpCSO5/z4608eUp19tbozkq2HJK6i3z1kT0H9tlADXuYIb1YYOBByU4Jsqkk75q48qA==}
@@ -984,12 +978,6 @@ packages:
     dependencies:
       '@jridgewell/sourcemap-codec': 1.4.14
     dev: true
-
-  /marked/4.2.12:
-    resolution: {integrity: sha512-yr8hSKa3Fv4D3jdZmtMMPghgVt6TWbk86WQaWhDloQjRSQhMMYCAro7jP7VDJrjjdV8pxVxMssXS8B8Y5DZ5aw==}
-    engines: {node: '>= 12'}
-    hasBin: true
-    dev: false
 
   /mdast-util-from-markdown/1.3.0:
     resolution: {integrity: sha512-HN3W1gRIuN/ZW295c7zi7g9lVBllMgZE40RxCX37wrTPWXCWtpvOZdfnuK+1WNpvZje6XuJeI3Wnb4TJEUem+g==}
@@ -1734,16 +1722,6 @@ packages:
       svelte: 3.55.1
     dev: true
 
-  /svelte-markdown/0.2.3_svelte@3.55.1:
-    resolution: {integrity: sha512-2h680NzTXnAD0CXhxe3GeHl6W+ayG4iKQRl+BIDRw+R0mUE0OiNxP1Vt8Rn+aWevB/LBiBIPCAwvL+0BkG057A==}
-    peerDependencies:
-      svelte: ^3.0.0
-    dependencies:
-      '@types/marked': 4.0.8
-      marked: 4.2.12
-      svelte: 3.55.1
-    dev: false
-
   /svelte-preprocess/5.0.1_4x7phaipmicbaooxtnresslofa:
     resolution: {integrity: sha512-0HXyhCoc9rsW4zGOgtInylC6qj259E1hpFnJMJWTf+aIfeqh4O/QHT31KT2hvPEqQfdjmqBR/kO2JDkkciBLrQ==}
     engines: {node: '>= 14.10.0'}
@@ -1844,6 +1822,7 @@ packages:
   /svelte/3.55.1:
     resolution: {integrity: sha512-S+87/P0Ve67HxKkEV23iCdAh/SX1xiSfjF1HOglno/YTbSTW7RniICMCofWGdJJbdjw3S+0PfFb1JtGfTXE0oQ==}
     engines: {node: '>= 8'}
+    dev: true
 
   /svelte2tsx/0.6.2_4x7phaipmicbaooxtnresslofa:
     resolution: {integrity: sha512-0ircYY2/jMOfistf+iq8fVHERnu1i90nku56c78+btC8svyafsc3OjOV37LDEOV7buqYY1Rv/uy03eMxhopH2Q==}
