@@ -7,6 +7,7 @@ type CoreEntry = {
 	slug: string
 	raw: string
 	is_draft: boolean
+	html: string
 }
 
 declare global {

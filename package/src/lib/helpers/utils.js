@@ -3,6 +3,9 @@ import fs from 'fs'
 import matter from 'gray-matter'
 import changelog from 'changelog-parser'
 
+import { micromark } from 'micromark'
+import { gfm, gfmHtml } from 'micromark-extension-gfm'
+
 import { dev } from '$app/environment'
 
 import { config } from '../config.js'
@@ -106,49 +109,63 @@ const create_entry = ({ collection, filename }) => {
     path: filepath,
     data,
     is_draft: !!draft,
-    raw: content
+    raw: content,
+    html: parse_markdown(content)
   }
 }
 
 /**
  * @param {object} params
- * @param {string} params.collection
+ * @param {string} [params.collection]
  * @param {URL} params.url
- * @returns {Promise<string>} - The XML atom feed
+ * @returns {Promise<Response>} - The XML atom feed
  */
-export const create_feed = async ({ collection, url }) => {
+export const load_feed = async ({ collection, url }) => {
+  if (!collection) {
+    if (COLLECTION_KEYS.length > 1)
+      throw new Error(
+        "Can't use `load_feed` with multiple collections, please specify one using `loadFeed`."
+      )
+
+    collection = COLLECTION_KEYS[0]
+  }
+
   const feed = new Feed({
     title: 'Feed',
     id: url.origin,
-
-    copyright: '© 2021',
-    generator: 'leblog', // optional, default = 'Feed for Node.js'
-    feedLinks: {
-      json: 'https://example.com/json',
-      atom: 'https://example.com/atom'
-    }
+    link: url.origin,
+    copyright: `© ${new Date().getFullYear()}`,
+    generator: 'leblog'
   })
 
   const { [collection]: entries } = await load_collection({ collection })
 
-  console.log('HEY', entries)
+  const [path, extension] = url.pathname.split('.')
 
   for (let entry of entries) {
     feed.addItem({
       title: entry.title,
       id: entry.slug,
-      // link: entry.url,
-      // description: post.description,
-      content: entry.raw,
-      date: new Date(entry.date)
-      // image: post.image
+      link: `${url.origin + url.origin.endsWith('/') ? '' : '/'}${path}/${entry.slug}`,
+      content: entry.html,
+      date: new Date(entry.date || new Date())
     })
   }
 
-  return feed.atom1()
+  let content_type, content
 
-  // posts.forEach(post => {
-  // });
+  if (extension === 'rss') {
+    content_type = 'application/rss+xml'
+    content = feed.rss2()
+  } else if (extension === 'json') {
+    content_type = 'application/json'
+    content = feed.json1()
+  } else {
+    content_type = 'application/atom+xml'
+    content = feed.atom1()
+  }
+
+  return new Response(content, { headers: { 'Content-Type': content_type } })
 }
 
 /**
@@ -179,9 +196,18 @@ const parse_changelog = async (filePath) => {
       collection: 'changelog',
       is_draft: false,
       version: entry.version,
-      raw: entry.body
+      raw: entry.body,
+      html: parse_markdown(entry.body)
     }
   })
 
   return await Promise.all(changelogPromise)
 }
+
+/** @param {string} markdown */
+const parse_markdown = (markdown) =>
+  micromark(markdown, {
+    allowDangerousHtml: true,
+    extensions: [gfm()],
+    htmlExtensions: [gfmHtml()]
+  })

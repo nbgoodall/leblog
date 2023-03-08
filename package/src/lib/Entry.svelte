@@ -3,6 +3,8 @@
 
   /** @type {Entry} */
   export let entry
+
+  $: console.log('hey', entry.html)
 </script>
 
-<SvelteMarkdown source={ entry.raw } />
+{@html entry.html}
