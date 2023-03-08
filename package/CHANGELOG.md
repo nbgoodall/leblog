@@ -1,5 +1,19 @@
 # Changelog
 
+## 0.5.0 - 2023-03-08
+
+### Added
+
+- You can now create Atom and RSS feeds! To do so, export a `GET` request handler from a page's `+server.js`:
+
+```js
+import { loadFeed } from 'leblog'
+
+export const GET = loadFeed('posts')
+```
+
+- Entries now contain an `html` field with — you guessed it! — the entry's HTML.
+
 ## 0.4.3 - 2023-03-07
 
 ### Fixed
