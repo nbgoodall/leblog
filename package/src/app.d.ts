@@ -17,6 +17,10 @@ declare global {
 		// interface Platform {}
 	}
 
+	type RequireAtLeastOne<T> = {
+		[K in keyof T]-?: Required<Pick<T, K>> & Partial<Pick<T, Exclude<keyof T, K>>>
+	}[keyof T]
+
 	type Entry = CoreEntry & {
 		date: Date
 		path: string

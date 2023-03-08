@@ -1,5 +1,6 @@
 ---
 title: introduction to leblog
+categories: [demo, kitchen sink]
 ---
 
 An introduction, an example, a **kitchen** _sink_.

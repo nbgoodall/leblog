@@ -3,7 +3,7 @@ import default_config from './default_config.json'
 
 /**
  * @typedef {object} Config
- * @property {Object<string, string>} collections
+ * @property {RequireAtLeastOne<Object<string, string>>} collections
  */
 
 let user_config = {}
