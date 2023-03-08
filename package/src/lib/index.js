@@ -1,2 +1,2 @@
-export { load, loadCollection, loadEntry } from './helpers.js'
+export { load, loadCollection, loadEntry, loadFeed } from './helpers'
 export { default as Entry } from './Entry.svelte'

@@ -1,47 +1,20 @@
+import { Feed } from 'feed'
 import fs from 'fs'
 import matter from 'gray-matter'
 import changelog from 'changelog-parser'
 
 import { dev } from '$app/environment'
 
-import { config } from './config.js'
+import { config } from '../config.js'
 
 const COLLECTION_KEYS = Object.keys(config.collections)
 
 /**
- * @param {string} collection
- * @returns {import('@sveltejs/kit').ServerLoad}
- */
-export const loadCollection =
-  (collection) =>
-  async ({ parent }) => ({
-    ...(await parent()),
-    ...(await load_collection({ collection }))
-  })
-
-/**
- * @param {string} collection
- * @param {string} [slug]
- * @returns {import('@sveltejs/kit').ServerLoad}
- */
-export const loadEntry =
-  (collection, slug) =>
-  async ({ params, parent }) => ({
-    ...(await parent()),
-    ...(await load_entry({ collection, slug: slug || params.slug || '' }))
-  })
-
-/** @type {import('@sveltejs/kit').ServerLoad} */
-export const load = async ({ params, parent }) => ({
-  ...(await parent()),
-  ...(await (params.slug ? load_entry({ slug: params.slug }) : load_collection()))
-})
-
-/**
  * @param {object} params
  * @param {string} [params.collection]
+ * @returns {Promise<{ [key: string]: (Entry | ChangelogEntry)[] }>}
  */
-const load_collection = async ({ collection } = {}) => {
+export const load_collection = async ({ collection } = {}) => {
   if (!collection) {
     if (COLLECTION_KEYS.length > 1)
       throw new Error(
@@ -68,7 +41,7 @@ const load_collection = async ({ collection } = {}) => {
  * @param {string} [params.collection]
  * @param {string} params.slug
  */
-const load_entry = async ({ collection, slug }) => {
+export const load_entry = async ({ collection, slug }) => {
   if (!collection) {
     if (COLLECTION_KEYS.length > 1)
       throw new Error(
@@ -138,12 +111,52 @@ const create_entry = ({ collection, filename }) => {
 }
 
 /**
+ * @param {object} params
+ * @param {string} params.collection
+ * @param {URL} params.url
+ * @returns {Promise<string>} - The XML atom feed
+ */
+export const create_feed = async ({ collection, url }) => {
+  const feed = new Feed({
+    title: 'Feed',
+    id: url.origin,
+
+    copyright: '© 2021',
+    generator: 'leblog', // optional, default = 'Feed for Node.js'
+    feedLinks: {
+      json: 'https://example.com/json',
+      atom: 'https://example.com/atom'
+    }
+  })
+
+  const { [collection]: entries } = await load_collection({ collection })
+
+  console.log('HEY', entries)
+
+  for (let entry of entries) {
+    feed.addItem({
+      title: entry.title,
+      id: entry.slug,
+      // link: entry.url,
+      // description: post.description,
+      content: entry.raw,
+      date: new Date(entry.date)
+      // image: post.image
+    })
+  }
+
+  return feed.atom1()
+
+  // posts.forEach(post => {
+  // });
+}
+
+/**
  * Changelogs can either be regular collections, or a single `CHANGELOG.md` file as per
  * keepachangelog.com.
  *
  * Parsed by https://github.com/ungoldman/changelog-parser.
  */
-
 const load_changelog = async () => ({
   changelog: await parse_changelog(config.collections.changelog)
 })
