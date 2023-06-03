@@ -1,5 +1,12 @@
 # Changelog
 
+### 0.6.0 - 2023-06-03
+
+### Changed
+
+- Posts no longer require a slug, so a date is a valid filename (e.g. `2023-06-03.md`).
+- Entries now have a `path` property which you can use for linking pages, which will be the date combined with the slug if there is one. Using the `slug` property alone still works, in case you don't want the date displayed in the URL.
+
 ## 0.5.0 - 2023-03-08
 
 ### Added

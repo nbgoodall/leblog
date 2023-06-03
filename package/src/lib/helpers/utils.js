@@ -96,17 +96,18 @@ const create_entry = ({ collection, filename }) => {
 
   const { data, content, excerpt: _excerpt } = matter(file)
 
-  const [_, draft, date_string, slug] = filename.match(/(_)?(\d{4}-\d{2}-\d{2})-(.+)\.md/) || []
+  const [_0, draft, date_string, _1, slug] =
+    filename.match(/(_)?(\d{4}-\d{2}-\d{2})(-(.+))?\.md/) || []
 
-  if (!date_string || !slug)
-    throw new Error(`Invalid filename: ${filename} (must match 'YYYY-MM-DD-{ slug }.md')`)
+  if (!date_string)
+    throw new Error(`Invalid filename: ${filename} (must match 'YYYY-MM-DD[-{ slug }].md')`)
 
   return {
     title: (data.title || slug) + (draft ? ' (draft)' : ''),
     date: new Date(date_string),
     slug,
     collection,
-    path: filepath,
+    path: `${date_string}${slug ? `-${slug}` : ''}`,
     data,
     is_draft: !!draft,
     raw: content,

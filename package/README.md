@@ -70,7 +70,7 @@ In the neighboring `+page.svelte`, `data` will be populated with the name of the
 <ul>
   {#each data.posts as entry}
     <li>
-      <a href="/{entry.slug}">{entry.title}</a>
+      <a href="/{entry.path}">{entry.title}</a>
 
       <Entry {entry} />
     </li>
@@ -113,10 +113,10 @@ In addition, changelog entries have an optional `version` field.
 
 leblog looks for a `leblog.config.js` file in the root of directory of your project. If it doesn't find one, it will use the following defaults:
 
-```json
-{
-  "collections": {
-    "posts": "src/posts"
+```js
+export default {
+  collections: {
+    posts: 'src/posts'
   }
 }
 ```
