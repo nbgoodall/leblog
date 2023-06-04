@@ -1,6 +1,12 @@
 # Changelog
 
-### 0.6.0 - 2023-06-03
+## 0.7.0 - 2023-06-04
+
+### Added
+
+- Footnotes are now supported (https://github.com/micromark/micromark-extension-gfm-footnote).
+
+## 0.6.0 - 2023-06-03
 
 ### Changed
 

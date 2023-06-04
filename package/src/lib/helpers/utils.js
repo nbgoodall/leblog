@@ -5,6 +5,7 @@ import changelog from 'changelog-parser'
 
 import { micromark } from 'micromark'
 import { gfm, gfmHtml } from 'micromark-extension-gfm'
+import { gfmFootnote, gfmFootnoteHtml } from 'micromark-extension-gfm-footnote'
 
 import { dev } from '$app/environment'
 
@@ -209,6 +210,6 @@ const parse_changelog = async (filePath) => {
 const parse_markdown = (markdown) =>
   micromark(markdown, {
     allowDangerousHtml: true,
-    extensions: [gfm()],
-    htmlExtensions: [gfmHtml()]
+    extensions: [gfm(), gfmFootnote()],
+    htmlExtensions: [gfmHtml(), gfmFootnoteHtml()]
   })

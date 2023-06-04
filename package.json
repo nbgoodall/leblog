@@ -12,6 +12,6 @@
   },
   "packageManager": "pnpm@7.27.1",
   "engines": {
-    "pnpm": "^7.0.0"
+    "pnpm": "^8.5.0"
   }
 }

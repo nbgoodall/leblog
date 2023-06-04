@@ -29,6 +29,10 @@ Inline `code`, and blocks too:
 console.error('whoops')
 ```
 
+And footnotes[^1].
+
+[^1]: Footnotes are so great.
+
 And _tables_:
 
 | Tables | Are | Cool |
