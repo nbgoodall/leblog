@@ -1,6 +1,16 @@
 <script>
   import { Changelog } from '$lib'
 
+  import { load } from 'leblog'
+
+  import _posts from 'leblog/posts'
+
+  console.log("HEY", _posts)
+
+  // import posts from 'leblog/changelog'
+
+  const posts = load('changelog', { limit: 10 })
+
   /** @type {import('./$types').PageData} */
   export let data
 

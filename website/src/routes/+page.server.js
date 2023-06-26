@@ -1,3 +1,3 @@
-import { loadCollection } from 'leblog'
+// import { loadCollection } from 'leblog'
 
-export const load = loadCollection('changelog')
+// export const load = loadCollection('changelog')

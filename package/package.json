@@ -25,6 +25,10 @@
 			"node": "./dist/index.js",
 			"browser": "./dist/index.browser.js",
 			"default": "./dist/index.js"
+		},
+		"./posts": {
+			"types": "./dist/index.d.ts",
+			"default": "./dist/index.js"
 		}
 	},
 	"files": [
@@ -42,8 +46,9 @@
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.5.0",
 		"@sveltejs/package": "^2.0.1",
+		"mdsvex": "^0.11.0",
 		"publint": "^0.1.9",
-		"svelte": "^3.55.1",
+		"svelte": "^4.0.0",
 		"svelte-check": "^3.0.1",
 		"tslib": "^2.4.1",
 		"typescript": "^4.9.3",
