@@ -6,6 +6,8 @@ import changelog from 'changelog-parser'
 import { micromark } from 'micromark'
 import { gfm, gfmHtml } from 'micromark-extension-gfm'
 import { gfmFootnote, gfmFootnoteHtml } from 'micromark-extension-gfm-footnote'
+// import { compile as mdsvex_compile } from 'mdsvex'
+// import { compile as svelte_compile } from 'svelte/compiler'
 
 // import { dev } from '$app/environment'
 
@@ -14,37 +16,6 @@ const dev = true
 import { config } from './config.js'
 
 const COLLECTION_KEYS = Object.keys(config.collections)
-
-/** @param {string} collection */
-export const load = async (collection) => {
-  // fetch(`/leblog`)
-  // get entries from server-side
-  // turn them into components client-side
-  // return
-  // const event = await fetch('https://occasionly.io/events/8a305572-13d7-4e78-b2fc-804e39b574d1')
-
-  // console.log('event', await res.json())
-  //
-  // const post = _readFileSync('../website/src/posts/2023-02-23-introduction.md', {
-  //   encoding: 'utf-8'
-  // })
-
-  // const compiled = await compile(post, { highlight: false })
-
-  // const component = svelte_compile(compiled?.code, { generate: 'ssr' })
-
-  // console.log(component.js.code)
-
-  // return component.js.code
-
-  // const res = await import('../../website/src/posts/2023-02-23-introduction.md')
-
-  // console.log('hello', res)
-  //
-  const entries = await load_collection({ collection })
-
-  return `export default ${JSON.stringify(entries)}`
-}
 
 /**
  * @param {object} params
@@ -64,8 +35,8 @@ export const load_collection = async ({ collection } = {}) => {
   if (collection === 'changelog' && fs.lstatSync(config.collections.changelog).isFile())
     return load_changelog()
 
-  const entries = collection_filenames(collection).map((filename) =>
-    create_entry({ collection, filename })
+  const entries = await Promise.all(
+    collection_filenames(collection).map((filename) => create_entry({ collection, filename }))
   )
 
   return entries.reverse()
@@ -151,14 +122,22 @@ const collection_filenames = (collection) => {
  * @param {object} params
  * @param {string} params.collection
  * @param {string} params.filename
- * @returns {Entry}
+ * @returns {Promise<Entry>}
  */
-const create_entry = ({ collection, filename }) => {
+const create_entry = async ({ collection, filename }) => {
   const filepath = `${config.collections[collection]}/${filename}`
 
   const file = fs.readFileSync(filepath, {
     encoding: 'utf-8'
   })
+
+  // const mdsvex = await mdsvex_compile(file)
+
+  // const svelte = svelte_compile(mdsvex.code, { generate: 'ssr' })
+
+  // console.log(svelte.js.code)
+  // console.log(await import(`data:text/javascript,${encodeURIComponent(comp)}`))
+  // console.log('HEY', svelte.js.code)
 
   const { data, content, excerpt: _excerpt } = matter(file)
 

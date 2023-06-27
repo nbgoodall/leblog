@@ -14,9 +14,6 @@ importers:
       prettier-plugin-jsdoc:
         specifier: ^0.4.2
         version: 0.4.2(prettier@2.8.4)
-      prettier-plugin-svelte:
-        specifier: ^2.9.0
-        version: 2.9.0(prettier@2.8.4)(svelte@3.55.1)
 
   package:
     dependencies:
@@ -1914,16 +1911,6 @@ packages:
       - supports-color
     dev: true
 
-  /prettier-plugin-svelte@2.9.0(prettier@2.8.4)(svelte@3.55.1):
-    resolution: {integrity: sha512-3doBi5NO4IVgaNPtwewvrgPpqAcvNv0NwJNflr76PIGgi9nf1oguQV1Hpdm9TI2ALIQVn/9iIwLpBO5UcD2Jiw==}
-    peerDependencies:
-      prettier: ^1.16.4 || ^2.0.0
-      svelte: ^3.2.0
-    dependencies:
-      prettier: 2.8.4
-      svelte: 3.55.1
-    dev: true
-
   /prettier@2.8.4:
     resolution: {integrity: sha512-vIS4Rlc2FNh0BySk3Wkd6xmwxB0FpOndW5fisM5H8hsZSxU2VWVB5CWIkIjWvrHjIhxk2g3bfMKM87zNTrZddw==}
     engines: {node: '>=10.13.0'}
@@ -2207,6 +2194,7 @@ packages:
   /svelte@3.55.1:
     resolution: {integrity: sha512-S+87/P0Ve67HxKkEV23iCdAh/SX1xiSfjF1HOglno/YTbSTW7RniICMCofWGdJJbdjw3S+0PfFb1JtGfTXE0oQ==}
     engines: {node: '>= 8'}
+    dev: false
 
   /svelte@4.0.0:
     resolution: {integrity: sha512-+yCYu3AEUu9n91dnQNGIbnVp8EmNQtuF/YImW4+FTXRHard7NMo+yTsWzggPAbj3fUEJ1FBJLkql/jkp6YB5pg==}

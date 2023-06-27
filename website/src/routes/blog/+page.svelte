@@ -47,9 +47,7 @@
       <li class="bg-gray-100 rounded-full px-2.5">{category}</li>
       {/each}
     </ul>
-    {/if}
-
-    <!-- <Entry {entry} /> -->
+    {/if} {@html entry.html}
   </li>
   {/each}
 </ul>

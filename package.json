@@ -4,8 +4,7 @@
   "private": true,
   "devDependencies": {
     "prettier": "^2.8.4",
-    "prettier-plugin-jsdoc": "^0.4.2",
-    "prettier-plugin-svelte": "^2.9.0"
+    "prettier-plugin-jsdoc": "^0.4.2"
   },
   "peerDependencies": {
     "svelte": "^3.2.0"

@@ -1,10 +1,9 @@
-<!-- <script>
-  import { Entry } from 'leblog'
+<script>
+  /*import { Entry } from 'leblog'*/
 
-  /** @type {import('./$types').PageData} */
-  export let data
+  // import post from 'leblog/posts/[slug]'
 </script>
-
+<!--
 <svelte:head>
   <title>{ data.entry.title } • leblog</title>
 </svelte:head>
@@ -28,4 +27,5 @@
 
   <Entry entry="{data.entry}" />
 </article>
+
  -->

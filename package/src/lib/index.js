@@ -1,7 +1,7 @@
 // import fs from 'node:fs'
 // import { compile } from 'mdsvex'
 // import { compile as svelte_compile } from 'svelte/compiler'
-import { load } from './load.js'
+import { load_collection } from './load.js'
 // import { readdir } from 'node:fs/promises'
 
 // const _readdirSync = fs.readdirSync
@@ -116,28 +116,21 @@ const plugin = () => {
     load(id) {
       const match = id.match(/virtual:leblog\/(.+)/)
 
-      if (match) return load(match[1])
+      if (match) return collection_import(match[1])
     }
   }
 }
 
+/** @param {string} path */
+export const load = (path) => {
+
+}
+
+/** @param {string} collection */
+const collection_import = async (collection) => {
+  const entries = await load_collection({ collection })
+
+  return `export default ${JSON.stringify(entries)}`
+}
+
 export default plugin
-
-// export default function myPlugin() {
-//   const virtualModuleId = 'virtual:my-module'
-//   const resolvedVirtualModuleId = '\0' + virtualModuleId
-
-//   return {
-//     name: 'my-plugin', // required, will show up in warnings and errors
-//     resolveId(id) {
-//       if (id === virtualModuleId) {
-//         return resolvedVirtualModuleId
-//       }
-//     },
-//     load(id) {
-//       if (id === resolvedVirtualModuleId) {
-//         return `export const msg = "from virtual module"`
-//       }
-//     },
-//   }
-// }

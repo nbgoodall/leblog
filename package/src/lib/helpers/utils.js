@@ -15,10 +15,10 @@ const COLLECTION_KEYS = Object.keys(config.collections)
 
 /**
  * @param {object} params
- * @param {string} [params.collection]
+ * @param {string} params.collection
  * @returns {Promise<{ [key: string]: (Entry | ChangelogEntry)[] }>}
  */
-export const load_collection = async ({ collection } = {}) => {
+export const load_collection = async ({ collection }) => {
   if (!collection) {
     if (COLLECTION_KEYS.length > 1)
       throw new Error(
