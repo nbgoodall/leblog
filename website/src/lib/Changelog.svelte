@@ -1,20 +1,19 @@
 <script>
-  import { Entry } from 'leblog'
-
-  /** @type {Entry[]} */
-  export let entries = []
+  import entries from 'leblog/changelog'
 </script>
 
 <ul class="!list-none !pl-0">
   {#each entries as entry}
-    <li class="!pl-0">
-      <h2 class="text-4xl flex justify-between items-center">
-        <span>{ entry.version }</span>
+  <li class="!pl-0">
+    <h2 class="text-4xl flex justify-between items-center">
+      <span>{ entry.version }</span>
 
-        <span class="text-gray-400 text-2xl font-light">{ new Date(entry.date).toDateString().toLowerCase() }</span>
-      </h2>
+      <span class="text-gray-400 text-2xl font-light"
+        >{ new Date(entry.date).toDateString().toLowerCase() }</span
+      >
+    </h2>
 
-      <Entry {entry} />
-    </li>
+    {@html entry.html}
+  </li>
   {/each}
 </ul>

@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
   import { Entry } from 'leblog'
 
   /** @type {import('./$types').PageData} */
@@ -28,3 +28,4 @@
 
   <Entry entry="{data.entry}" />
 </article>
+ -->

@@ -1,5 +1,5 @@
 <script>
-  import { Entry } from 'leblog'
+  import posts from 'leblog/posts'
 
   /** @type {import('./$types').PageData} */
   export let data
@@ -26,7 +26,7 @@
 </p>
 
 <ul class="!list-none !pl-0">
-  {#each data.posts as entry}
+  {#each posts as entry}
   <li class="!pl-0">
     <h2 class="text-4xl flex justify-between items-center">
       <a
@@ -49,7 +49,7 @@
     </ul>
     {/if}
 
-    <Entry {entry} />
+    <!-- <Entry {entry} /> -->
   </li>
   {/each}
 </ul>

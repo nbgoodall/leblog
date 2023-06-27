@@ -1,5 +1,5 @@
 import fs from 'fs'
-import default_config from './default_config.json'
+import default_config from './default_config.json' assert { type: 'json' }
 
 /**
  * @typedef {object} Config
@@ -11,9 +11,11 @@ let user_config = {}
 const user_config_exists = fs.existsSync('leblog.config.js')
 
 if (user_config_exists) {
-  const [file_import] = Object.values(import.meta.glob('/leblog.config.js', { eager: true }))
+  const config_js = fs.readFileSync('leblog.config.js', { encoding: 'utf-8' })
 
-  user_config = file_import.default
+  const js_import = await import(`data:text/javascript,${config_js}`)
+
+  user_config = js_import.default
 }
 
 /** @type {Config} */

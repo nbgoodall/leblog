@@ -1,39 +1,102 @@
-import fs from 'node:fs'
-import { compile } from 'mdsvex'
-import { compile as svelte_compile } from 'svelte/compiler'
+// import fs from 'node:fs'
+// import { compile } from 'mdsvex'
+// import { compile as svelte_compile } from 'svelte/compiler'
+import { load } from './load.js'
+// import { readdir } from 'node:fs/promises'
 
-const _readdirSync = fs.readdirSync
-const _readFileSync = fs.readFileSync
+// const _readdirSync = fs.readdirSync
+// const _statSync = fs.statSync
+// const _readFileSync = fs.readFileSync
 
 /**
  * @param {import('node:fs').PathLike} filepath
  * @param {Parameters<typeof import('node:fs').readdirSync>[1]} options
  */
-fs.readdirSync = function (filepath, options) {
-  /** @type {unknown[]} */
-  const paths = _readdirSync(filepath, options)
+// fs.readdirSync = function (filepath, options) {
+//   /** @type {unknown[]} */
+//   const paths = _readdirSync(filepath, options)
 
-  if (!filepath.toString().includes('routes')) return paths
+//   if (!filepath.toString().includes('routes')) return paths
 
-  // console.log('hey', filepath, paths)
+//   // console.log('hey', filepath, paths)
 
-  if (filepath.toString() == '/Users/nick/projects/leblog/website/src/routes') {
-    paths.push({
-      name: 'leblog',
-      isFile: () => true,
-      isDirectory: () => false,
-      isBlockDevice: () => false,
-      isFIFO: () => false,
-      isCharacterDevice: () => false,
-      isSocket: () => false,
-      isSymbolicLink: () => false
-    })
+//   if (filepath.toString() == '/Users/nick/projects/leblog/website/src/routes') {
+//     paths.push({
+//       name: 'leblog',
+//       isFile: () => false,
+//       isDirectory: () => true,
+//       isBlockDevice: () => false,
+//       isFIFO: () => false,
+//       isCharacterDevice: () => false,
+//       isSocket: () => false,
+//       isSymbolicLink: () => false
+//     })
+//   }
+//   // console.log('hi', paths)
 
-    // console.log('hi', paths)
-  }
+//   if (filepath.toString() == '/Users/nick/projects/leblog/website/src/routes/leblog') {
+//     console.log('FILES', _readdirSync('./api'))
+//     // paths.push({
+//     //   name: 'leblog',
+//     //   isFile: () => true,
+//     //   isDirectory: () => false,
+//     //   isBlockDevice: () => false,
+//     //   isFIFO: () => false,
+//     //   isCharacterDevice: () => false,
+//     //   isSocket: () => false,
+//     //   isSymbolicLink: () => false
+//     // })
 
-  return paths
-}
+//     // console.log('hi', paths)
+//   }
+
+//   return paths
+// }
+
+/**
+ * @param {string} filepath
+ * @param {Parameters<import('node:fs').StatSyncFn>[1]} options
+ */
+// fs.statSync = function (filepath, options) {
+//   if (!filepath.includes('routes')) {
+//     return _statSync(filepath, options)
+//   }
+
+//   // try {
+//   const result = _statSync(filepath, options)
+
+//   // console.log('statSync', result)
+//   return result
+//   // } catch (error) {
+//   //   // everything internal to houdini should assume posix paths
+//   //   filepath = path.posixify(filepath.toString())
+
+//   //   const mock = virtual_file(path.basename(filepath), { withFileTypes: true })
+
+//   //   // always fake the root +layout.server.js and +layout.svelte
+//   //   if (
+//   //     filepath.endsWith(path.join('routes', '+layout.svelte')) ||
+//   //     filepath.endsWith(path.join('routes', '+layout.svelte')) ||
+//   //     filepath.endsWith(path.join('routes', '+layout.server.js')) ||
+//   //     filepath.endsWith(path.join('routes', '+layout.server.js'))
+//   //   ) {
+//   //     return mock
+//   //   }
+
+//   //   // we want to fake +layout.js if there is a +layout.svelte
+//   //   else if (filepath.endsWith('+layout.js')) {
+//   //     return mock
+//   //   }
+
+//   //   // we want to fake +page.js if there is a +page.svelte
+//   //   else if (filepath.endsWith('+page.js')) {
+//   //     return mock
+//   //   }
+
+//   //   // if we got this far we didn't fake the file
+//   //   throw error
+//   // }
+// }
 
 // export { load, loadCollection, loadEntry, loadFeed } from './helpers'
 // export { default as Entry } from './Entry.svelte'
@@ -44,51 +107,21 @@ fs.readdirSync = function (filepath, options) {
  */
 
 /** @returns {import('vite').Plugin} */
-const leblog = () => {
+const plugin = () => {
   return {
     name: 'leblog',
     resolveId(id) {
-      if (id === 'leblog/posts') return 'virtual:leblog/posts'
+      if (id.match(/leblog\/.+/)) return `virtual:${id}`
     },
     load(id) {
-      if (id === 'virtual:leblog/posts') return load('posts')
+      const match = id.match(/virtual:leblog\/(.+)/)
+
+      if (match) return load(match[1])
     }
   }
 }
 
-/** @param {string} collection */
-export const load = async (collection) => {
-  // fetch(`/leblog`)
-  // get entries from server-side
-  // turn them into components client-side
-  // return
-  //
-  //
-  const post = _readFileSync('../website/src/posts/2023-02-23-introduction.md', {
-    encoding: 'utf-8'
-  })
-
-  const compiled = await compile(post, { highlight: false })
-
-  const component = svelte_compile(compiled?.code, { generate: 'ssr' })
-
-  console.log(component.js.code)
-
-  return component.js.code
-
-  // const res = await import('../../website/src/posts/2023-02-23-introduction.md')
-
-  // console.log('hello', res)
-
-  /** @type {any[]} */
-  const posts = []
-
-  return `export default []`
-}
-
-export { load as leblog }
-
-export default leblog
+export default plugin
 
 // export default function myPlugin() {
 //   const virtualModuleId = 'virtual:my-module'

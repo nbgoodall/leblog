@@ -26,9 +26,19 @@
 			"browser": "./dist/index.browser.js",
 			"default": "./dist/index.js"
 		},
-		"./posts": {
-			"types": "./dist/index.d.ts",
+		"./*": {
+			"types": "./dist/types.d.ts",
 			"default": "./dist/index.js"
+		}
+	},
+	"typesVersions": {
+		">4.0": {
+			"index.d.ts": [
+				"./dist/index.d.ts"
+			],
+			"*": [
+				"./dist/types.d.ts"
+			]
 		}
 	},
 	"files": [
@@ -44,15 +54,15 @@
 	},
 	"devDependencies": {
 		"@sveltejs/adapter-auto": "^2.0.0",
-		"@sveltejs/kit": "^1.5.0",
-		"@sveltejs/package": "^2.0.1",
+		"@sveltejs/kit": "^1.20.5",
+		"@sveltejs/package": "^2.1.0",
 		"mdsvex": "^0.11.0",
 		"publint": "^0.1.9",
 		"svelte": "^4.0.0",
-		"svelte-check": "^3.0.1",
+		"svelte-check": "^3.4.3",
 		"tslib": "^2.4.1",
-		"typescript": "^4.9.3",
-		"vite": "^4.0.0"
+		"typescript": "^5.0.0",
+		"vite": "^4.3.6"
 	},
 	"peerDependencies": {
 		"@sveltejs/kit": "^1.0.0",
