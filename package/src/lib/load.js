@@ -17,6 +17,17 @@ import { config } from './config.js'
 
 const COLLECTION_KEYS = Object.keys(config.collections)
 
+export const load_collections = async () => {
+  /** @type {Record<keyof typeof config.collections, any>} */
+  let collections = {}
+
+  for (let collection of COLLECTION_KEYS) {
+    collections[collection] = await load_collection({ collection })
+  }
+
+  return collections
+}
+
 /**
  * @param {object} params
  * @param {string} [params.collection]
@@ -74,34 +85,6 @@ const parse_changelog = async (filePath) => {
   })
 
   return await Promise.all(changelogPromise)
-}
-
-/**
- * @param {object} params
- * @param {string} [params.collection]
- * @param {string} params.slug
- */
-export const load_entry = async ({ collection, slug }) => {
-  if (!collection) {
-    if (COLLECTION_KEYS.length > 1)
-      throw new Error(
-        "Can't use `load` with multiple collections, please specify one using `loadEntry`."
-      )
-
-    collection = COLLECTION_KEYS[0]
-  }
-
-  const filename = collection_filenames(collection).find((filename) =>
-    filename.endsWith(`${slug}.md`)
-  )
-
-  if (filename) {
-    return {
-      entry: create_entry({ collection, filename })
-    }
-  }
-
-  throw new Error(`File not found: ${slug} (from collection '${collection}')`)
 }
 
 /** @param {string} collection */

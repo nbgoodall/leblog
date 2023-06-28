@@ -1,10 +1,7 @@
 <script>
-  import posts from 'leblog/posts'
+  import { load } from 'leblog'
 
-  /** @type {import('./$types').PageData} */
-  export let data
-
-  $: console.log(data)
+  const posts = load('posts')
 </script>
 
 <svelte:head>

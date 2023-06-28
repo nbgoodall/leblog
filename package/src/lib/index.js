@@ -1,12 +1,15 @@
 // import fs from 'node:fs'
 // import { compile } from 'mdsvex'
 // import { compile as svelte_compile } from 'svelte/compiler'
-import { load_collection } from './load.js'
+// import { load_collection } from './load.js'
 // import { readdir } from 'node:fs/promises'
+import entries from 'leblog/entries'
 
 // const _readdirSync = fs.readdirSync
 // const _statSync = fs.statSync
 // const _readFileSync = fs.readFileSync
+//
+// import { page } from '$app/stores'
 
 /**
  * @param {import('node:fs').PathLike} filepath
@@ -98,39 +101,68 @@ import { load_collection } from './load.js'
 //   // }
 // }
 
-// export { load, loadCollection, loadEntry, loadFeed } from './helpers'
-// export { default as Entry } from './Entry.svelte'
-
-/**
- * 1. Define an API that responds to all /leblog requests
- * 2. 'Hook' into SvelteKit's `hooks.server.js`
- */
-
 /** @returns {import('vite').Plugin} */
 const plugin = () => {
   return {
     name: 'leblog',
     resolveId(id) {
-      if (id.match(/leblog\/.+/)) return `virtual:${id}`
+      if (id === 'leblog/entries') return 'virtual:leblog/entries'
     },
     load(id) {
-      const match = id.match(/virtual:leblog\/(.+)/)
-
-      if (match) return collection_import(match[1])
+      if (id === 'virtual:leblog/entries') return entries_import()
     }
   }
 }
 
+const entries_import = async () => {
+  const { load_collections } = await import('./load.js')
+
+  const collections = await load_collections()
+
+  return `export default ${JSON.stringify(collections)}`
+}
+
 /** @param {string} path */
 export const load = (path) => {
+  const [collection, slug] = path.split('/')
 
+  const _entries = entries[collection]
+
+  if (!_entries) throw new Error(`'${collection}' is not a valid collection. Try one of '${Object.keys(entries).join(`', '`)}'.`)
+
+  if (slug) {
+    let entry = _entries.find(entry => entry.path.includes(slug))
+
+    if (!entry) throw new Error(`Could not find the entry '${slug}' in the ${collection} collection.`)
+
+    return entry
+  }
+
+
+  return _entries
 }
 
-/** @param {string} collection */
-const collection_import = async (collection) => {
-  const entries = await load_collection({ collection })
+// export const load_entry = async ({ collection, slug }) => {
+//   if (!collection) {
+//     if (COLLECTION_KEYS.length > 1)
+//       throw new Error(
+//         "Can't use `load` with multiple collections, please specify one using `loadEntry`."
+//       )
 
-  return `export default ${JSON.stringify(entries)}`
-}
+//     collection = COLLECTION_KEYS[0]
+//   }
+
+//   const filename = collection_filenames(collection).find((filename) =>
+//     filename.endsWith(`${slug}.md`)
+//   )
+
+//   if (filename) {
+//     return {
+//       entry: create_entry({ collection, filename })
+//     }
+//   }
+
+//   throw new Error(`File not found: ${slug} (from collection '${collection}')`)
+// }
 
 export default plugin

@@ -1,5 +1,7 @@
 <script>
-  import entries from 'leblog/changelog'
+  import { load } from 'leblog'
+
+  const entries = load('changelog')
 </script>
 
 <ul class="!list-none !pl-0">
