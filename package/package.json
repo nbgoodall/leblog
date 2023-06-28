@@ -1,7 +1,7 @@
 {
 	"name": "leblog",
 	"license": "MIT",
-	"version": "0.8.1",
+	"version": "0.8.2",
 	"description": "Add a blog (or changelog) to any SvelteKit site.",
 	"repository": {
 		"type": "git",
@@ -24,6 +24,10 @@
 			"types": "./dist/index.d.ts",
 			"default": "./dist/index.js"
 		},
+		"./vite": {
+			"types": "./dist/vite.d.ts",
+			"default": "./dist/vite.js"
+		},
 		"./entries": {
 			"types": "./dist/entries.d.ts",
 			"default": "./dist/index.js"
@@ -33,6 +37,9 @@
 		">4.0": {
 			"index.d.ts": [
 				"./dist/index.d.ts"
+			],
+			"vite": [
+				"./dist/vite.d.ts"
 			],
 			"entries": [
 				"./dist/entries.d.ts"
