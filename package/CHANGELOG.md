@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.8.0 - 2023-06-28
+
+### Changed
+
+- The way this plugin works has been overhauled. It's now a Vite plugin, and you load entries from the exported load function.
+
 ## 0.7.0 - 2023-06-04
 
 ### Added

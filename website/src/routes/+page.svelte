@@ -18,27 +18,31 @@
   /** @type {import('./$types').PageData} */
   export let data
 
-  let write_text = `---
+  const install_text = `...
+import leblog from 'leblog'
+
+export default defineConfig({
+  plugins: [leblog(), ...]
+})`
+
+  const write_text = `---
 title: my epic post
 ---
 
 the title says it all`
 
-  let load_text = `export { load } from 'leblog'`
+  const load_text = `<script>
+  import { load } from 'leblog'
 
-  let render_text = `<script>
-  import { Entry } from 'leblog'
-
-  /** @type {import('./$types').PageData} */
-  export let data
+  const posts = load('posts')
 <\/script>
 
 <ul>
-  {#each data.posts as entry}
+  {#each posts as post}
     <li>
-      <h2>{entry.title}</h2>
+      <h2>{post.title}</h2>
 
-      <Entry {entry} />
+      {@html post.html}
     </li>
   {/each}
 </ul>`
@@ -68,26 +72,26 @@ the title says it all`
 
 <pre>npm install leblog</pre>
 
-<h3>1. write</h3>
+<h3>1. install the plugin</h3>
+
+<p>In <code>vite.config.js</code>:</p>
+
+<pre>{ install_text }</pre>
+
+<h3>2. write</h3>
 
 <p>
-  In <code>src/posts</code> write markdown files with
+  In the <code>posts</code> directory at the root of your project write markdown files with
   <code>yyyy-mm-dd-{"{"}slug{"}"}.md</code>-formatted filenames.
 </p>
 
 <pre>{ write_text }</pre>
 
-<h3>2. load</h3>
+<h3>3. load</h3>
 
-<p>In <code>+page.server.js</code>:</p>
+<p>On any page or in any component:</p>
 
 <pre>{ load_text }</pre>
-
-<h3>3. render</h3>
-
-<p>In its sibling <code>+page.svelte</code>:</p>
-
-<pre>{ render_text }</pre>
 
 <p>
   Et voila! Full documentation is on
