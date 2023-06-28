@@ -25,9 +25,15 @@
 			"default": "./dist/index.js"
 		},
 		"./entries": {
-			"types": "./dist/index.d.ts",
+			"types": "./dist/entries.d.ts",
 			"default": "./dist/index.js"
 		}
+	},
+	"typesVersions": {
+    ">4.0": {
+    	"index.d.ts": ["./dist/index.d.ts"],
+      "entries": ["./dist/entries.d.ts"]
+    }
 	},
 	"files": [
 		"dist/*"

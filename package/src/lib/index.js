@@ -3,6 +3,8 @@
 // import { compile as svelte_compile } from 'svelte/compiler'
 // import { load_collection } from './load.js'
 // import { readdir } from 'node:fs/promises'
+//
+
 import entries from 'leblog/entries'
 
 // const _readdirSync = fs.readdirSync
@@ -122,7 +124,10 @@ const entries_import = async () => {
   return `export default ${JSON.stringify(collections)}`
 }
 
-/** @param {string} path */
+/**
+ * @param {string} path
+ * @returns {Array<Entry | ChangelogEntry>}
+ */
 export const load = (path) => {
   const [collection, slug] = path.split('/')
 
@@ -142,27 +147,5 @@ export const load = (path) => {
   return _entries
 }
 
-// export const load_entry = async ({ collection, slug }) => {
-//   if (!collection) {
-//     if (COLLECTION_KEYS.length > 1)
-//       throw new Error(
-//         "Can't use `load` with multiple collections, please specify one using `loadEntry`."
-//       )
-
-//     collection = COLLECTION_KEYS[0]
-//   }
-
-//   const filename = collection_filenames(collection).find((filename) =>
-//     filename.endsWith(`${slug}.md`)
-//   )
-
-//   if (filename) {
-//     return {
-//       entry: create_entry({ collection, filename })
-//     }
-//   }
-
-//   throw new Error(`File not found: ${slug} (from collection '${collection}')`)
-// }
 
 export default plugin
