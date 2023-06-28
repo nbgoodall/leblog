@@ -9,20 +9,16 @@ import { gfmFootnote, gfmFootnoteHtml } from 'micromark-extension-gfm-footnote'
 // import { compile as mdsvex_compile } from 'mdsvex'
 // import { compile as svelte_compile } from 'svelte/compiler'
 
-// import { dev } from '$app/environment'
-
-const dev = true
-
 import { config } from './config.js'
 
 const COLLECTION_KEYS = Object.keys(config.collections)
 
-export const load_collections = async () => {
+export const load_collections = async ({ dev = true }) => {
   /** @type {Record<keyof typeof config.collections, any>} */
   let collections = {}
 
   for (let collection of COLLECTION_KEYS) {
-    collections[collection] = await load_collection({ collection })
+    collections[collection] = await load_collection({ collection, dev })
   }
 
   return collections
@@ -31,9 +27,10 @@ export const load_collections = async () => {
 /**
  * @param {object} params
  * @param {string} [params.collection]
+ * @param {boolean} [params.dev]
  * @returns {Promise<(Entry | ChangelogEntry)[]>}
  */
-export const load_collection = async ({ collection } = {}) => {
+export const load_collection = async ({ collection, dev } = {}) => {
   if (!collection) {
     if (COLLECTION_KEYS.length > 1)
       throw new Error(
@@ -47,7 +44,7 @@ export const load_collection = async ({ collection } = {}) => {
     return load_changelog()
 
   const entries = await Promise.all(
-    collection_filenames(collection).map((filename) => create_entry({ collection, filename }))
+    collection_filenames(collection, dev).map((filename) => create_entry({ collection, filename }))
   )
 
   return entries.reverse()
@@ -87,8 +84,11 @@ const parse_changelog = async (filePath) => {
   return await Promise.all(changelogPromise)
 }
 
-/** @param {string} collection */
-const collection_filenames = (collection) => {
+/**
+ * @param {string} collection
+ * @param {boolean} dev
+ */
+const collection_filenames = (collection, dev) => {
   const collection_path = config.collections[collection]
 
   return fs

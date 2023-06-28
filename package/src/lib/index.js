@@ -103,6 +103,8 @@ import entries from 'leblog/entries'
 //   // }
 // }
 
+let dev = true
+
 /** @returns {import('vite').Plugin} */
 const plugin = () => {
   return {
@@ -112,6 +114,9 @@ const plugin = () => {
     },
     load(id) {
       if (id === 'virtual:leblog/entries') return entries_import()
+    },
+    configResolved(config) {
+      dev = config.mode === 'development'
     }
   }
 }
@@ -119,7 +124,7 @@ const plugin = () => {
 const entries_import = async () => {
   const { load_collections } = await import('./load.js')
 
-  const collections = await load_collections()
+  const collections = await load_collections(dev)
 
   return `export default ${JSON.stringify(collections)}`
 }
