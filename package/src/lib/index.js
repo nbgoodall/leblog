@@ -1,4 +1,4 @@
-import entries from 'leblog/entries'
+import { entries } from 'virtual:leblog'
 
 /**
  * @param {string} path
