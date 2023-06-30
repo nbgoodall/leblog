@@ -11,6 +11,8 @@ export const handle = async ({ event, resolve }) => {
   // if (event.url)
 
   // console.log('HI', event, new URL(`${event.url.origin}/blog.atom`))
+  //
+  // console.log("HEY", event)
 
   if (event.url.pathname === '/blog.rss') {
     let new_event = {
