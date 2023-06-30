@@ -1,11 +1,10 @@
 import fs from 'node:fs'
 import path from 'path'
 import { fileURLToPath } from 'url'
+import { set_dev } from './env'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
-
-let dev = true
 
 const virtual_module_id = 'virtual:leblog'
 const resolved_virtual_module_id = '\0' + virtual_module_id
@@ -38,7 +37,7 @@ const plugin = () => {
       })
     },
     configResolved(config) {
-      dev = config.mode === 'development'
+      set_dev(config.mode === 'development')
     },
     config() {
       return {
@@ -51,7 +50,7 @@ const plugin = () => {
 const virtual_import = async () => {
   const { load_collections } = await import('./utils.js')
 
-  const collections = await load_collections({ dev })
+  const collections = await load_collections()
 
   return `export const entries = ${JSON.stringify(collections)}`
 }

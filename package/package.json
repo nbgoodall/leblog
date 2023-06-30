@@ -12,6 +12,7 @@
 	"author": "Nick Goodall",
 	"scripts": {
 		"dev": "vite build && svelte-package --watch",
+		"dev:server": "vite dev",
 		"build": "vite build && npm run package",
 		"build:server": "vite build",
 		"preview": "vite preview",

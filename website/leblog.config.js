@@ -1,6 +1,6 @@
 export default {
   collections: {
-    posts: 'src/posts',
+    posts: 'posts',
     changelog: '../package/CHANGELOG.md'
   }
 }
