@@ -23,6 +23,8 @@
   {/each}
 </ul> -->
 
-<article class="prose mt-6">
-{@html entry.html}
-</article>
+<!-- <article class="prose mt-6"> -->
+<div class="w-full">
+<pre class="!font-body w-full">{@html entry.raw}</pre>
+</div>
+<!-- </article> -->
