@@ -3,7 +3,9 @@
   /** @type {import('./$types').PageData} */
   export let data
 
-  $: entries = data.collections[$page.params.collection]
+  // $: entry = data.collections[$page.params.collection].find()
+  //
+  $: entry = data.collections[$page.params.collection].find(entry => entry.slug === $page.params.entry)
 </script>
 
 <h2 class="text-3xl">{$page.params.entry}</h2>
@@ -20,3 +22,7 @@
     </li>
   {/each}
 </ul> -->
+
+<article class="prose mt-6">
+{@html entry.html}
+</article>

@@ -45,6 +45,9 @@ importers:
       '@sveltejs/package':
         specifier: ^2.1.0
         version: 2.1.0(svelte@4.0.0)(typescript@5.0.2)
+      '@tailwindcss/typography':
+        specifier: ^0.5.9
+        version: 0.5.9(tailwindcss@3.2.7)
       autoprefixer:
         specifier: ^10.4.7
         version: 10.4.13(postcss@8.4.24)
