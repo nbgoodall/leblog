@@ -13,9 +13,9 @@
       <li>
         <ul role="list" class="-mx-2 space-y-1">
           {#each Object.keys($page.data.collections) as collection}
+            {@const is_active = $page.url.pathname.startsWith(`/leblog/collections/${collection}`)}
             <li>
-              <!-- Current: "bg-indigo-700 text-white", Default: "text-indigo-200 hover:text-white hover:bg-indigo-700" -->
-              <a href="/leblog/collections/{collection}" class="text-indigo-200 hover:text-white hover:bg-indigo-700 group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
+              <a href="/leblog/collections/{collection}" class="{ is_active ? 'bg-indigo-700 text-white' : 'text-indigo-200 hover:text-white hover:bg-indigo-700' } group flex gap-x-3 rounded-md p-2 text-sm leading-6 font-semibold">
                 {collection}
               </a>
             </li>
