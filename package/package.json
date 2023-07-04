@@ -13,7 +13,7 @@
 	"scripts": {
 		"dev": "vite build && svelte-package --watch",
 		"dev:server": "vite dev",
-		"build": "vite build && npm run package",
+		"build": "vite build && cp -r build src/lib/server && npm run package",
 		"build:server": "vite build",
 		"preview": "vite preview",
 		"package": "svelte-kit sync && svelte-package && publint",
