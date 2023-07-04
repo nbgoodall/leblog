@@ -10,7 +10,7 @@ import { gfmFootnote, gfmFootnoteHtml } from 'micromark-extension-gfm-footnote'
 // import { compile as svelte_compile } from 'svelte/compiler'
 
 import { config } from './config.js'
-import { dev } from './env'
+import { dev } from './env.js'
 
 const COLLECTION_KEYS = Object.keys(config.collections)
 

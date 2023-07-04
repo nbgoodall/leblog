@@ -9,6 +9,5 @@
 
 <h2 class="text-3xl">{$page.params.entry}</h2>
 
-<div class="w-full whitespace-pre mt-6 focus:outline-none border p-3 rounded" contenteditable>
-{entry.raw}
+<div class="w-full whitespace-pre mt-6 focus:outline-none border p-3 rounded" contenteditable>{entry.raw}
 </div>
