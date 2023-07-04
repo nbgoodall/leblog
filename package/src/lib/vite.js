@@ -28,7 +28,8 @@ const plugin = () => {
     async configureServer(server) {
       vite_server = server
 
-      const { handler } = await import('../build/handler.js')
+      /** @ts-ignore */
+      const { handler } = await import('../dist/server/handler.js')
 
       server.middlewares.use((req, res, next) => {
         if (req.originalUrl.startsWith('/leblog')) {
