@@ -1,7 +1,7 @@
-// import { Feed } from 'feed'
 import fs from 'fs'
 import matter from 'gray-matter'
 import changelog from 'changelog-parser'
+import { Feed } from 'feed'
 
 import { micromark } from 'micromark'
 import { gfm, gfmHtml } from 'micromark-extension-gfm'
@@ -48,6 +48,50 @@ export const load_collection = async ({ collection } = {}) => {
   )
 
   return entries.reverse()
+}
+
+/**
+ * @param {object} params
+ * @param {Record<keyof typeof config.collections, any} [params.collections]
+ * @param {string[]} [params.types]
+ * @returns {Promise<Response>} - The XML atom feed
+ */
+export const create_feeds = ({ collections, types }) => {
+  let feeds = {}
+
+  for (let collection of Object.keys(collections)) {
+    feeds[collection] = {}
+
+    const feed = new Feed({
+      title: 'Feed',
+      // id: url.origin,
+      // link: url.origin,
+      copyright: `© ${new Date().getFullYear()}`,
+      generator: 'leblog'
+    })
+
+    for (let entry of collections[collection]) {
+      feed.addItem({
+        title: entry.title,
+        id: entry.slug,
+        // link: `${url.origin + url.origin.endsWith('/') ? '' : '/'}${path}/${entry.slug}`,
+        content: entry.html,
+        date: new Date(entry.date || new Date())
+      })
+    }
+
+    for (let type of types) {
+      if (type === 'rss') {
+        feeds[collection][type] = feed.rss2()
+      } else if (type === 'json') {
+        feeds[collection][type] = feed.json1()
+      } else {
+        feeds[collection][type] = feed.atom1()
+      }
+    }
+  }
+
+  return feeds
 }
 
 /**
@@ -149,3 +193,5 @@ const parse_markdown = (markdown) =>
     extensions: [gfm(), gfmFootnote()],
     htmlExtensions: [gfmHtml(), gfmFootnoteHtml()]
   })
+
+

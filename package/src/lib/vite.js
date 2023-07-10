@@ -55,11 +55,16 @@ const plugin = () => {
 }
 
 const virtual_import = async () => {
-  const { load_collections } = await import('./utils.js')
+  const { load_collections, create_feeds } = await import('./utils.js')
 
   const collections = await load_collections()
 
-  return `export const entries = ${JSON.stringify(collections)}`
+  const feeds = create_feeds({ collections, types: ['rss'] })
+
+  return `
+    export const collections = ${JSON.stringify(collections)}
+    export const feeds = ${JSON.stringify(feeds)}
+  `
 }
 
 /** Invalidate the entries when they change */

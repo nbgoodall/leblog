@@ -1,4 +1,4 @@
-import { entries } from 'virtual:leblog'
+import { collections } from 'virtual:leblog'
 
 /**
  * @param {string} path
@@ -7,12 +7,12 @@ import { entries } from 'virtual:leblog'
 export const load = (path) => {
   const [collection, slug] = path.split('/')
 
-  const _entries = entries[collection]
+  const entries = collections[collection]
 
-  if (!_entries) throw new Error(`'${collection}' is not a valid collection. Try one of '${Object.keys(entries).join(`', '`)}'.`)
+  if (!entries) throw new Error(`'${collection}' is not a valid collection. Try one of '${Object.keys(entries).join(`', '`)}'.`)
 
   if (slug) {
-    let entry = _entries.find(entry => entry.path.includes(slug))
+    let entry = entries.find(entry => entry.path.includes(slug))
 
     if (!entry) throw new Error(`Could not find the entry '${slug}' in the ${collection} collection.`)
 
@@ -20,6 +20,6 @@ export const load = (path) => {
   }
 
 
-  return _entries
+  return entries
 }
 
