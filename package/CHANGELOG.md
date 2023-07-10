@@ -1,5 +1,11 @@
 # Changelog
 
+## 0.9.1 - 2023-07-10
+
+### Fixed
+
+- Building apps with the `leblog` plugin would hang indefinitely; no longer!
+
 ## 0.9.0 - 2023-07-10
 
 ### Changed
