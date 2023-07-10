@@ -19,7 +19,7 @@
     ></code
   >
   folder, and it comes with its very own <a href="/blog.atom" target="_blank">Atom feed</a> (RSS and
-  JSON also work). Also <a href="/blog.rss">RSS</a>!
+  JSON also work).!
 </p>
 
 <ul class="!list-none !pl-0">

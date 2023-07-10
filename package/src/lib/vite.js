@@ -106,9 +106,12 @@ fs.readdirSync = (filepath, options) => {
 
   if (route_path) {
     for (let feed of feed_paths) {
+      // Breaks with e.g. 'blog.atom' when a 'blog' directory exists...
       const overlap = route_overlap(route_path, feed)
 
       const [filename] = feed.slice(overlap.length).split('/').filter(Boolean)
+
+      // console.log({filename, overlap, filepath})
 
       if (overlap) {
         if (feed.endsWith(filename)) {
@@ -181,14 +184,23 @@ const virtual_directory = (name, path) => {
   return dirent
 }
 
-function route_overlap(a, b, min = 2) {
-  if (b.length <= min)
-    return ''
+const route_overlap = (a, b) => {
+  const sub_a = a.split('/'),
+        sub_b = b.split('/')
 
-  if (a.endsWith(b))
-    return b
+  const i_start = sub_a.indexOf(sub_b[0])
 
-  return route_overlap(a, b.substring(0, b.length - 1), min)
+  if (i_start < 0) return ''
+
+  let overlap = []
+
+  for (let i = 0; i < sub_b.length; i++) {
+    if (sub_b[i] !== sub_a[i + i_start]) break
+
+    overlap.push(sub_b[i])
+  }
+
+  return overlap.join('/')
 }
 
 export default plugin

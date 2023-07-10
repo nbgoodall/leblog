@@ -2,7 +2,7 @@ export default {
   collections: {
     posts: {
       path: 'posts',
-      feed: 'feed.rss'
+      feed: 'blog.atom'
     },
     changelog: '../package/CHANGELOG.md'
   }
