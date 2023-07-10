@@ -1,7 +1,7 @@
 {
 	"name": "leblog",
 	"license": "MIT",
-	"version": "0.9.0",
+	"version": "0.9.1",
 	"description": "Add a blog (or changelog) to any SvelteKit site.",
 	"repository": {
 		"type": "git",
@@ -61,7 +61,7 @@
 		"micromark-extension-gfm-footnote": "^1.1.2"
 	},
 	"devDependencies": {
-		"@sveltejs/kit": "^1.20.5",
+		"@sveltejs/kit": "^1.22.1",
 		"@sveltejs/package": "^2.1.0",
 		"@tailwindcss/typography": "^0.5.9",
 		"autoprefixer": "^10.4.7",
@@ -69,12 +69,12 @@
 		"mdsvex": "^0.11.0",
 		"postcss": "^8.4.24",
 		"publint": "^0.1.9",
-		"svelte": "^4.0.0",
+		"svelte": "^4.0.5",
 		"svelte-check": "^3.4.3",
 		"tailwindcss": "^3.1.5",
 		"tslib": "^2.4.1",
 		"typescript": "^5.0.0",
-		"vite": "^4.3.6"
+		"vite": "^4.4.2"
 	},
 	"peerDependencies": {
 		"@sveltejs/kit": "^1.0.0",

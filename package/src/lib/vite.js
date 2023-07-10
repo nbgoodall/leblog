@@ -18,6 +18,17 @@ const feed_paths = collection_values.filter(val => val?.feed).map(({ feed }) => 
 /** @type {import('vite').ViteDevServer} */
 let vite_server
 
+/** Invalidate the entries when they change */
+const files_to_watch = collection_values.map(val => typeof val === 'string' ? val : val.path)
+const watcher = chokidar.watch(files_to_watch)
+
+watcher.on('change', () => {
+  const virtual_module = vite_server.moduleGraph.getModuleById(resolved_virtual_module_id)
+
+  vite_server.moduleGraph.invalidateModule(virtual_module)
+})
+
+
 /** @returns {import('vite').Plugin} */
 const plugin = () => {
   return {
@@ -54,6 +65,9 @@ const plugin = () => {
       return {
         optimizeDeps: { exclude: [virtual_module_id] },
       }
+    },
+    buildEnd() {
+      watcher.close()
     }
   }
 }
@@ -76,16 +90,6 @@ const virtual_import = async () => {
     ${feeds_export}
   `
 }
-
-/** Invalidate the entries when they change */
-const files_to_watch = collection_values.map(val => typeof val === 'string' ? val : val.path)
-const watcher = chokidar.watch(files_to_watch)
-
-watcher.on('change', () => {
-  const virtual_module = vite_server.moduleGraph.getModuleById(resolved_virtual_module_id)
-
-  vite_server.moduleGraph.invalidateModule(virtual_module)
-})
 
 /** Patch the filesystem reads for custom routes */
 

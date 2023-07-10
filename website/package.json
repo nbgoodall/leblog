@@ -16,16 +16,16 @@
 		"slender-ui": "0.0.1-beta.126"
 	},
 	"devDependencies": {
-		"@sveltejs/adapter-static": "^2.0.1",
-		"@sveltejs/kit": "^1.20.4",
+		"@sveltejs/adapter-static": "^2.0.2",
+		"@sveltejs/kit": "^1.22.1",
 		"@tailwindcss/typography": "^0.5.9",
 		"autoprefixer": "^10.4.7",
 		"postcss": "^8.4.24",
-		"svelte": "^4.0.0",
+		"svelte": "^4.0.5",
 		"svelte-check": "^3.4.3",
 		"tailwindcss": "^3.1.5",
 		"typescript": "^5.0.0",
-		"vite": "^4.0.0"
+		"vite": "^4.4.2"
 	},
 	"type": "module"
 }
