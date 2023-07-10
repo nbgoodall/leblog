@@ -1,6 +1,9 @@
 export default {
   collections: {
-    posts: 'posts',
+    posts: {
+      path: 'posts',
+      feed: 'feed.rss'
+    },
     changelog: '../package/CHANGELOG.md'
   }
 }

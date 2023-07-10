@@ -11,7 +11,9 @@ const __dirname = path.dirname(__filename)
 const virtual_module_id = 'virtual:leblog'
 const resolved_virtual_module_id = '\0' + virtual_module_id
 
-const FEEDS = ['blog/feed.rss', 'random/feed.atom'].map(item => item + '/+server.js')
+const collection_values = Object.values(config.collections)
+
+const feed_paths = collection_values.filter(val => val?.feed).map(({ feed }) => feed.replace(/^\/*/, '') + '/+server.js')
 
 /** @type {import('vite').ViteDevServer} */
 let vite_server
@@ -26,7 +28,7 @@ const plugin = () => {
     async load(id) {
       if (id === resolved_virtual_module_id) return virtual_import()
 
-      const feed = FEEDS.find(path => id.endsWith(path))
+      const feed = feed_paths.find(path => id.endsWith(path))
       if (feed) return fs.readFileSync(path.resolve(__dirname, feed), { encoding: 'utf-8' })
     },
     async configureServer(server) {
@@ -59,16 +61,22 @@ const virtual_import = async () => {
 
   const collections = await load_collections()
 
-  const feeds = create_feeds({ collections, types: ['rss'] })
+  let feeds_export = ''
+
+  if (feed_paths.length) {
+    const feeds = create_feeds({ collections })
+
+    feeds_export = `export const feeds = ${JSON.stringify(feeds)}`
+  }
 
   return `
     export const collections = ${JSON.stringify(collections)}
-    export const feeds = ${JSON.stringify(feeds)}
+    ${feeds_export}
   `
 }
 
 /** Invalidate the entries when they change */
-const files_to_watch = Object.values(config.collections)
+const files_to_watch = collection_values.map(val => typeof val === 'string' ? val : val.path)
 const watcher = chokidar.watch(files_to_watch)
 
 watcher.on('change', () => {
@@ -92,10 +100,10 @@ fs.readdirSync = (filepath, options) => {
   } catch {}
 
 
-  const [route_path] = filepath.match(/\/routes.*/) || []
+  const [route_path] = filepath.toString().match(/\/routes.*/) || []
 
   if (route_path) {
-    for (let feed of FEEDS) {
+    for (let feed of feed_paths) {
       const overlap = route_overlap(route_path, feed)
 
       const [filename] = feed.slice(overlap.length).split('/').filter(Boolean)
@@ -123,7 +131,7 @@ fs.statSync = (filepath, options) => {
     const [route_path] = filepath.match(/\/routes.*/) || []
 
     if (route_path) {
-      for (let feed of FEEDS) {
+      for (let feed of feed_paths) {
         const overlap = route_overlap(route_path, feed)
 
         if (overlap) {
@@ -141,7 +149,7 @@ fs.statSync = (filepath, options) => {
 }
 
 fs.readFileSync = (filepath, options) => {
-  const feed = FEEDS.find(path => filepath.endsWith(path))
+  const feed = feed_paths.find(path => filepath.endsWith(path))
   if (feed) return _readFileSync(path.resolve(__dirname, 'feed_endpoint.js'), options)
 
   return _readFileSync(filepath, options)

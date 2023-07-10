@@ -22,4 +22,3 @@ export const load = (path) => {
 
   return entries
 }
-
