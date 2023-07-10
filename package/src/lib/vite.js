@@ -22,8 +22,10 @@ let vite_server
 const plugin = () => {
   return {
     name: 'leblog',
-    resolveId(id, _, { isEntry }) {
+    resolveId(id) {
       if (id === virtual_module_id) return resolved_virtual_module_id
+
+      if (feed_paths.find(path => id.endsWith(path))) return id
     },
     async load(id) {
       if (id === resolved_virtual_module_id) return virtual_import()
