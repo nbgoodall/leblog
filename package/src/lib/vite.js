@@ -106,12 +106,9 @@ fs.readdirSync = (filepath, options) => {
 
   if (route_path) {
     for (let feed of feed_paths) {
-      // Breaks with e.g. 'blog.atom' when a 'blog' directory exists...
       const overlap = route_overlap(route_path, feed)
 
       const [filename] = feed.slice(overlap.length).split('/').filter(Boolean)
-
-      // console.log({filename, overlap, filepath})
 
       if (overlap) {
         if (feed.endsWith(filename)) {

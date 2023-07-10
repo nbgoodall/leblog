@@ -47,7 +47,7 @@ On any page or in any component:
 ```js
 import { load } from 'leblog'
 
-const posts = load('posts') // or `load('posts/${slug}') for a specific noe`
+const posts = load('posts') // or `load('posts/${slug}')` for a specific one
 ```
 
 And then to render it:
@@ -87,30 +87,22 @@ leblog looks for a `leblog.config.js` file in the root of directory of your proj
 ```js
 export default {
   collections: {
-    posts: 'posts'
+    posts: 'posts',
+    updates: {
+      path: '/path/to/updates',
+      feed: '/route/feed.rss'
+    }
   }
 }
 ```
 
-`collections` is a an object where the key is the name of the collection and the value is the path to the directory containing the markdown files.
+`collections` is a an object where the key is the name of the collection and the value is either the path to the directory containing the markdown files, or an object like the `updates` above.
 
 `changelog` is a special key, whose value can either be a path to a directory containing markdown files, or a single markdown file adhering to the [keepachangelog.com](http://keepachangelog.com) standards.
 
 ## Atom/RSS feeds
 
-To add an RSS or Atom feed, add a `+server.js` file at your desired route and use the exported `loadFeed` helper. For the [demo blog](https://leblog.dev/blog.atom), this is in `src/routes/blog.atom/+server.js`:
-
-```js
-import { loadFeed } from 'leblog'
-
-export const GET = loadFeed('posts')
-```
-
-If you only have 1 collection, you can use the exported `GET` helper to infer which one:
-
-```js
-export { GET } from 'leblog'
-```
+To add an RSS or Atom feed, specify the `feed` key in a collection entry, using either an `rss`, `atom` or `json` extension (e.g. `/feed.rss`).
 
 ## Todo
 

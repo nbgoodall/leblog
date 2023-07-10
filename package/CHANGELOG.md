@@ -1,5 +1,25 @@
 # Changelog
 
+## 0.9.0 - 2023-07-10
+
+### Changed
+
+- Feeds are now 'virtual', and the only thing you need to do is specify them in your config. For example:
+
+```js
+export default {
+  collections: {
+    posts: {
+      path: 'posts',
+      feed: 'blog.atom'
+    },
+    changelog: 'CHANGELOG.md'
+  }
+}
+```
+
+And as if by magic, a `/blog.atom` route will exist on your website with an Atom feed of all your posts (RSS and JSON also work; just change the file extension).
+
 ## 0.8.4 - 2023-06-28
 
 ### Changed
