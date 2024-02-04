@@ -7,10 +7,13 @@
     "prettier-plugin-jsdoc": "^0.4.2"
   },
   "peerDependencies": {
-    "svelte": "^3.2.0"
+    "svelte": "5.0.0-next.45"
   },
-  "packageManager": "pnpm@7.27.1",
   "engines": {
-    "pnpm": "^8.5.0"
-  }
+   "bun": "^1.0.25"
+  },
+  "workspaces": [
+    "package",
+    "website"
+  ]
 }
